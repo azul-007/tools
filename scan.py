@@ -1,3 +1,8 @@
+"""
+Author: Daniel Edwards
+Date: 06-April-2019
+"""
+
 import os
 import argparse
 from multiprocessing import Process
