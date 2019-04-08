@@ -1,8 +1,3 @@
-"""
-Author: Daniel Edwards
-Date: 06-April-2019
-"""
-
 import os
 import argparse
 from multiprocessing import Process
@@ -14,7 +9,7 @@ args = parser.parse_args()
 
 
 def nmap():
-    os.system('nmap -sV -sC -Pn -sS -O {0} > {1}.nmap.txt'.format(args.target,args.name))
+    os.system('nmap -sV -Pn -sS -O {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
