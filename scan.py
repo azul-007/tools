@@ -2,6 +2,10 @@ import os
 import argparse
 from multiprocessing import Process
 
+"""
+Usage: python scan.py --target victim_ip --name name_of_box
+"""
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', '-t',help='Specify victim\'s  IP via --target or -t')
 parser.add_argument('--name', '-n', help='Specify victim name via --name or -n')
