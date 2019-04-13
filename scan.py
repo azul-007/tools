@@ -2,6 +2,7 @@ import os
 import argparse
 from multiprocessing import Process
 
+#kali
 
 #Usage: python scan.py --target victim_ip --name name_of_box
 
