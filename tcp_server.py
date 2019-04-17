@@ -15,3 +15,12 @@ print "* Listening on %s:%d" %(bind_ip,bind_port)
 #client handling thread
 def handle_client(client_socket):
 	
+	#print out what the client sends
+	request = client_socket.recv(1024)
+
+	print "* Received: %s" % request
+
+	#send back a packet
+	client_socket.send("ACK!")
+
+	client_socket.close()
