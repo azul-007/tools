@@ -2,7 +2,7 @@ import socket
 import threading
 
 bind_ip   = "0.0.0.0"
-bind_port = 9999
+bind_port = 8888
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 
@@ -34,4 +34,4 @@ while True:
 
 	#spin up our client thread to handle incoming data
 	client_handler = threading.Thread(target = handle_client,args=(client,))
-		client_handler.start()
+	client_handler.start()

@@ -1,7 +1,7 @@
 import socket
 
-target 		= "www.google.com"
-target_port = 80
+target 		= "0.0.0.0"
+target_port = 8888
 
 
 #Create a socket object
