@@ -15,6 +15,6 @@ client.connect((target, target_port))
 client.send("GET /HTTP/1.1\r\nHost: google.com\r\n\r\n")
 
 #receive some data
-response = client.receive(4096)
+response = client.recv(4096)
 
 print response
