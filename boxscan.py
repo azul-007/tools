@@ -1,17 +1,18 @@
+#!/usr/bin/python3
+
 import os
 import argparse
 from multiprocessing import Process
 
-#kali
-
 #Usage: python boxscan.py --target victim_ip --name name_of_box
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', '-t',help='Specify victim\'s  IP via --target or -t')
 parser.add_argument('--name', '-n', help='Specify victim name via --name or -n')
 args = parser.parse_args()
 
+os.makedirs('/root/boxes/test'+args.name)
+os.chdir('/root/boxes/test'+args.name)
 
 def nmap():
     os.system('nmap -sV -Pn -sS -O {0} > {1}.nmap.txt'.format(args.target,args.name))
