@@ -6,6 +6,10 @@ from multiprocessing import Process
 
 #Usage: python boxscan.py --target victim_ip --name name_of_box
 
+#Description
+#Creates directory from name of box. Scans target, creates an nmap, nikto 
+#and dirb txt file then stores the files in the directory of box name.
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', '-t',help='Specify victim\'s  IP via --target or -t')
 parser.add_argument('--name', '-n', help='Specify victim name via --name or -n')
