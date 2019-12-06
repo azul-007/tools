@@ -4,7 +4,7 @@ from multiprocessing import Process
 
 #kali
 
-#Usage: python scan.py --target victim_ip --name name_of_box
+#Usage: python boxscan.py --target victim_ip --name name_of_box
 
 
 parser = argparse.ArgumentParser()
