@@ -1,6 +1,7 @@
 #!/bin/bash
 
 import socket
+from termcolor import colored
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -10,8 +11,9 @@ port = 443
 def portscanner(port):
 
 	if sock.connect_ex((host, port)):
-		print("Port %d is closed" % (port))
+		print("Port %d is closed" % (port), 'red')
 	else:
-		print("Port %d is open" % (port))
+		print("Port %d is open" % (port), 'green')
 
-portscanner(port)
+for port in range(1,100):
+	portscanner(port)
