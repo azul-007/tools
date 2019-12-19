@@ -5,9 +5,8 @@ from termcolor import colored
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host = "192.168.1.127"
-port = 443
 
+host = input("Enter host: ")
 def portscanner(port):
 
 	if sock.connect_ex((host, port)):
