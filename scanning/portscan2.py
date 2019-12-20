@@ -22,7 +22,7 @@ def portScan(tgtHost, tgtPorts):
 		tgtIP = gethostbyname(tgtHost)
 
 	except:
-		print 'Unknown host %s' '%tgtHost'
+		print 'Unknown host %s' %tgtHost
 
 	try:
 		tgtname = gethostbyaddress(tgtIP)
