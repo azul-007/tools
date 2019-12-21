@@ -4,7 +4,14 @@ import socket
 import os
 import sys
 
+#Author: Daniel Edwards
+#Date: 12/21/2019
+#Description: This program has two functions; retBanner returns the banner information 
+#from a vulnerable machine. And checkVulns, verifies if the machine is vulnerable via the
+#banner.
 
+
+#Gets the banner from vuln machine
 def retBanner(ip,port):
 
 	try:
@@ -18,6 +25,7 @@ def retBanner(ip,port):
 		return
 
 
+#Determines if machine is vulnerable
 def checkVulns(banner, filename):
 	file = open(filename,'r')
 	for line in file.readlines():
