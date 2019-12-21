@@ -4,11 +4,14 @@ import socket
 import os
 import sys
 
-#Author: Daniel Edwards
-#Date: 12/21/2019
-#Description: This program has two functions; retBanner returns the banner information 
-#from a vulnerable machine. And checkVulns, verifies if the machine is vulnerable via the
-#banner.
+'''Author: Daniel Edwards
+Date: 12/21/2019
+Description: This program has two functions; retBanner returns the banner information 
+from a vulnerable machine. And checkVulns, verifies if the machine is vulnerable via the
+banner.'''
+
+#Disclaimer: This script is meant to be used in your own virtual environment against intentionally vulnerable machines.
+#Please change the following lines to reflect your environment: 60, 62(range)
 
 
 #Gets the banner from vuln machine
