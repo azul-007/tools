@@ -18,6 +18,13 @@ def retBanner(ip,port):
 		return
 
 
+def checkVulns(banner, filename):
+	file = open(filename,'r')
+	for line in file.readlines():
+		if line.strip('\n') in banner:
+			print '[+]Server is vulnerable: ' + banner.strip('\n')
+
+
 def main():
 
 	if len(sys.argv) == 2:
