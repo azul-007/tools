@@ -5,6 +5,19 @@ import os
 import sys
 
 
+def retBanner(ip,port):
+
+	try:
+		setdefaulttimeout(2)
+		sock=socket(ip,port)
+		sock.connect((ip,port))
+		banner = sock.recv(1024)
+		return banner
+
+	except:
+		return
+
+
 def main():
 
 	if len(sys.argv) == 2:
