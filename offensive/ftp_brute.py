@@ -1,13 +1,17 @@
 #!usr/bin/python3
+
+
 import ftplib
 import argparse
 from termcolor import colored
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', '-T',help='Specify victim\'s  IP via --target or -T')
-parser.add_argument('--file', '-F', help='Specify file name and/or path to file --name or -n')
+parser.add_argument('--passwd', '-P', help='Specify file name and/or path to file --passwd or -P')
+args = parser.parse_args()
 
-def bruteLogin(hostname, passwdfile):
+
+def bruteLogin(args.target, args.passwd):
 
 	try:
 		pf = open(passwdfile,"r"):
