@@ -6,6 +6,9 @@ import sys
 import struct
 import binascii
 
+#Author: Daniel Edwards
+
+
 
 sock_created = False
 sniffer_socket = 0
@@ -20,6 +23,8 @@ def anaylzer_ether_header(data_recv):
 	src_mac  = binascii.hexlify(eth_hdr[1])
 	proto    = eth_hdr[2] >> 8
 	data     = data_recv[14:]
+
+	print("___________________________ETHERNET HEADER________________________________")
 
 
 def main()
