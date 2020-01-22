@@ -16,14 +16,51 @@ sniffer_socket = 0
 
 def analyze_ip_header(data_recv):
 
-	ip_hrd = struct.unpack('!6H4s4s',data_recv[:20]) #Go to struct tables to learn the values of 6H4s4s and 6s6sh
+	ip_hdr = struct.unpack('!6H4s4s',data_recv[:20]) #Go to struct tables to learn the values of 6H4s4s and 6s6sh
+	ver = ip_hdr[0] >> 12 #Grabs the first two bytes, represented by the H in 6H4s4s.
+	ihl = (ip_hdr[0] >>) 8 & 0x0f #Taking the data from the ip header, without the version.
+	tos = ip_hdr[0] & 0x00ff
+	tot_len = ip_hdr[1]
+	ip_id = ip_hdr[2]
+	flags = ip_hdr[3] >> 13
+	frag_offset = ip_hdr[3] & 0x1fff
+	ip_ttl = ip_hdr[4] >> 8 
+	ip_proto - ip_hdr[4] & 0x00ff
+	checksum = ip_hdr[5]
+	src_address = sock.inet_ntoa(ip_hdr[6])
+	dst_address = sock.inet_ntoa(ip_hdr[7])
+	data = data_recv[20:] 
+
+	print("___________________________ETHERNET HEADER________________________________")
+	print("Version: %hu" %ver)
+	print("IHL: %hu" %ihl)
+	print("TOS: %hu" %tos)
+	print("Length: %hu" %tot_len)
+	print("IP ID: %hu" %ip_id)
+	print("Offset: %hu" %frag_offset)
+	print("TTL: %hu" %ip_ttl)
+	print("Protocol: %hu" %ip_proto)
+	print("Checksum: %hu" %checksum)
+	print("Source IP: %hu" %src_address)
+	print("Destination IP: %hu" %dst_address)
+
+	if ip_proto == 6:
+		tcp_udp = "TCP"
+	elif ip_proto == 17:
+		tcp_udp = "UDP"
+	else:
+		tcp_udp = "OTHER"
+
+	return data,tcp_udp
+
+
 
 
 def anaylze_ether_header(data_recv):
 
 	ip_bool = False
 
-	eth_hdr  = struct.unpack('!6s6sH', data_recv[:14]) #The first 6s represents the mac dest. The second 6s represents the src dest
+	eth_hdr  = struct.unpack('!6s6sH', data_recv[:14]) #The first 6s represents the dest mac. The second 6s represents the src dest. The H corresponds to the remaining two bytes which is the protocol being used. 
 	dest_mac = binascii.hexlify(eth_hdr[0])
 	src_mac  = binascii.hexlify(eth_hdr[1])
 	proto    = eth_hdr[2] >> 8
@@ -56,7 +93,7 @@ def main()
     data_recv, ip_bool = anaylzer_ether_header(data_recv)
 
     if ip_bool:
-    	data_recv, tcp_udp = anaylzer_ether_header(data_recv)
+    	data_recv, tcp_udp = anaylzer_ip_header(data_recv)
 
     else:
     	return 
