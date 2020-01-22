@@ -19,7 +19,7 @@ def analyze_ip_header(data_recv):
 	ip_hrd = struct.unpack('!6H4s4s',data_recv[:20]) #Go to struct tables to learn the values of 6H4s4s and 6s6sh
 
 
-def anaylze_ether_header(data_recv):
+def anaylzer_ether_header(data_recv):
 
 	ip_bool = False
 
