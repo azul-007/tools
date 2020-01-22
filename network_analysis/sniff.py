@@ -23,7 +23,7 @@ def anaylze_ether_header(data_recv):
 
 	ip_bool = False
 
-	eth_hdr  = struct.unpack('!6s6sH', data_recv[:14])
+	eth_hdr  = struct.unpack('!6s6sH', data_recv[:14]) #The first 6s represents the mac dest. The second 6s represents the src dest
 	dest_mac = binascii.hexlify(eth_hdr[0])
 	src_mac  = binascii.hexlify(eth_hdr[1])
 	proto    = eth_hdr[2] >> 8
