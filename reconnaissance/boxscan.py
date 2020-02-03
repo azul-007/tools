@@ -15,8 +15,8 @@ parser.add_argument('--target', '-t',help='Specify victim\'s  IP via --target or
 parser.add_argument('--name', '-n', help='Specify victim name via --name or -n')
 args = parser.parse_args()
 
-os.makedirs('/root/boxes/'+str(args.name))
-os.chdir('/root/boxes/'+str(args.name))
+os.makedirs('/root/boxes/'+args.name)
+os.chdir('/root/boxes/'+args.name)
 
 def nmap():
     os.system('nmap -sV -Pn -sS -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
