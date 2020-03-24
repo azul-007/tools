@@ -14,5 +14,5 @@ def ip_addr_valid(list):
             continue
              
         else:
-            print('\n* There was an invalid IP address in the file: {} :(\n'.format(ip))
+            print('Invalid IP address: {}'.format(ip))
             sys.exit()
