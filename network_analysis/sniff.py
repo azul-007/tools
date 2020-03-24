@@ -18,7 +18,7 @@ def analyze_ip_header(data_recv):
 
 	ip_hdr = struct.unpack('!6H4s4s',data_recv[:20]) #Go to struct tables to learn the values of 6H4s4s and 6s6sh
 	ver = ip_hdr[0] >> 12 #Grabs the first two bytes, represented by the H in 6H4s4s.
-	ihl = (ip_hdr[0] >>) 8 & 0x0f #Taking the data from the ip header, without the version.
+	ihl = (ip_hdr[0] >> 8) & 0x0f #Taking the data from the ip header, without the version.
 	tos = ip_hdr[0] & 0x00ff
 	tot_len = ip_hdr[1]
 	ip_id = ip_hdr[2]
@@ -44,7 +44,7 @@ def analyze_ip_header(data_recv):
 	print("Source IP: %hu" %src_address)
 	print("Destination IP: %hu" %dst_address)
 
-	if ip_proto == 6:
+	if ip_proto == 6: #number of tcp header
 		tcp_udp = "TCP"
 	elif ip_proto == 17:
 		tcp_udp = "UDP"
@@ -72,18 +72,18 @@ def anaylze_ether_header(data_recv):
 	print("PROTOCL: %hu" % proto)
 
 	if proto == 0x08:
-	    ip_bool = True:
+	    ip_bool = True
 
 	return data, ip_bool				
 
 
-def main()
+def main():
 
     global sock_created
     global sniffer_socket
     if sock_created == False:
 
-    	sniffer_socket = socket.socket(socket.PR_PACKET, socket.SOCK_RAW, socket.htons(0x0003))
+    	sniffer_socket = socket.socket(socket.PF_PACKET, socket.SOCK_RAW, socket.htons(0x0003))
     	sock_created = True
 
 
@@ -97,3 +97,13 @@ def main()
 
     else:
     	return 
+
+    if tcp_udp == "TCP":
+    	data_recv = analyze_tcp_header(data_recv)
+
+    elif tcp_udp == "UDP":
+    	data_recv = analyze_tcp_header(data_recv)
+
+
+while True:
+	main()

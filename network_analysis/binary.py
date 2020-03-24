@@ -16,10 +16,10 @@ def bin_num():
 		
 			add_zero = "0" * diff
 	
-			print(num, "\t", str(add_zero + bin_a))
+			print("*", num, "\t", str(add_zero + bin_a))
 		else:
 
-			print(num, "\t", bin_a)
+			print("*", num, "\t", bin_a)
 		
 bin_num()
 
