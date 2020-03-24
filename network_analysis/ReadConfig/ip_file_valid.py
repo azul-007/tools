@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 
 import os.path
@@ -7,7 +6,7 @@ import sys
 #Checking IP address and content
 def ip_file_valid():
 
-	ip_file = input("Enter IP the name and path of file: ")
+	ip_file = input("Enter IP the name: ")
 
 	if os.path.isfile(ip_file) == True:
 
