@@ -11,7 +11,7 @@ def ip_file_valid():
     while(os.path.isfile(ip_file) == False):
 
         #print("File is valid")
-        ip_file = input("File is invalid. Please try again: ")
+        ip_file = input("File is invalid. Please try again: ".format(ip_file))
 
     else:
 
