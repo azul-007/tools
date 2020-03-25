@@ -79,3 +79,34 @@ def ssh_connection(ip):
 
 		#Starting from the beginning of the file
 		selected_cmd_file.seek(0)
+
+		#Writing each line in the file to the device
+		for each_line in selected_cmd_file.readlines():
+
+			connection.send(each_line + "\n")
+			time.sleep(2)
+
+		#close user file
+		selected_user_file.close()
+
+		#Close cmd file
+		selected_cmd_file.close()
+
+		#Checking command output for IOS 
+		router_output = connection.recv(65535)
+
+		if re.search(b"% Invalid input", router_output):
+
+			print("There was at least one IOS syntax error on device {}".format(ip))
+
+		else:
+
+			print("DONE for device {}".format(ip))
+
+		print(str(router_output) + "\n")
+
+		#Closing connection
+		session.close()
+
+	except paramiko.AuthenticationException:
+		print("Invalid username or password. Closing program")
