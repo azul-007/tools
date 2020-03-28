@@ -5,7 +5,7 @@ import argparse
 from multiprocessing import Process
 
 #Usage: python boxscan.py --target victim_ip --name name_of_box
-#Author: Daniel Edwards
+#Author: azul-007
 #Description
 #Creates directory from name of box. Scans target, creates an nmap, nikto 
 #and dirb txt file then stores the files in the directory of box name.
