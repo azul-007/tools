@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-
 import os.path
-import sys
 
 #Checking IP address and content
 def ip_file_valid():
@@ -11,13 +9,10 @@ def ip_file_valid():
     while(os.path.isfile(ip_file) == False):
 
         #print("File is valid")
-        ip_file = input("File is invalid. Please try again: ".format(ip_file))
+        ip_file = input("{} is invalid. Please try again: \n".format(ip_file))
 
     else:
-
-        #print("File {} does not exist. Please try again".format(ip_file))
-        #sys.exit()
-        print("File is valid")
+        print("{} is valid \n".format(ip_file))
         
 
     #Read selected file

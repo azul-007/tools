@@ -1,1 +1,1 @@
-show ip int brief
+show interfaces loopback 0

@@ -97,7 +97,7 @@ def ssh_conn(ip):
 
         #Checking command output for IOS 
         router_output = connection.recv(65535)
-        print(type(router_output))
+       
         if re.search(b"% Invalid input", router_output):
 
             print("There was at least one IOS syntax error on device {}".format(ip))
@@ -105,8 +105,8 @@ def ssh_conn(ip):
         else:
 
             print("\nDONE for device {} \n".format(ip))
-
-        print(re.findall(r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", str(router_output))[1])
+        #Use for cmd.txt
+        #print(re.findall(r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", str(router_output))[1])
 
         #Closing connection
         session.close()

@@ -1,8 +1,8 @@
 import sys
-from ip_reach import ip_reach
-from ssh_conn import ssh_conn
 from ip_file_valid import ip_file_valid
 from ip_addr_valid import ip_addr_valid
+from ip_reach import ip_reach
+from ssh_conn import ssh_conn
 from create_threads import create_threads
 
 #Save the list of IP addresses
