@@ -1,4 +1,5 @@
 import sys
+import time
 from ip_file_valid import ip_file_valid
 from ip_addr_valid import ip_addr_valid
 from ip_reach import ip_reach
@@ -28,4 +29,7 @@ except KeyboardInterrupt:
 	sys.exit()
 
 #Calling threads creation for each ssh connection
-create_threads(ip_list, ssh_conn)
+while True:
+
+	create_threads(ip_list,ssh_conn)
+	time.sleep(10)
