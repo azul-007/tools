@@ -104,9 +104,18 @@ def ssh_conn(ip):
 
         else:
 
-            print("\nDONE for device {} \n".format(ip))
-        #Use for cmd.txt
-        #print(re.findall(r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", str(router_output))[1])
+            print("\nDONE for device {} Data sent to file at {} \n".format(ip, str(datetime.datetime.now())))
+        
+        #Search for CPU Utilization values within the output of "show processes top once"
+        cpu = re.search(b"%Cpu\(s\):(\s)+(.+?)(\s)* us,",router_output)
+
+        #Extract the second group. Matches the actual value of the CPU utilization and decoding to the UTF-8 format from the binary data type
+        utilization = cpu.group(2).decode("utf-8")
+
+        with open("cpu.txt","a") as f:
+            f.write(utilization + "\n")
+
+        
 
         #Closing connection
         session.close()
