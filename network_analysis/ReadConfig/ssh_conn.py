@@ -9,25 +9,25 @@ user_file = input("Enter user file name: ")
 #Verify the validity of the username/passwd file
 if os.path.isfile(user_file) == True:
     
-    print("\nUsername/Password file is valid")
+    print("\n* Username/Password file is valid")
 
 else:
 
-    print("File {} does not exist".format(user_file))
+    print("\n* File {} does not exist".format(user_file))
     sys.exit()
 
 
 #Checking commands file
 cmd_file = input("\nEnter commands file name: ")
 
-#Verify the valide cmmands file
+#Verify the valide commands file
 if os.path.isfile(cmd_file) == True:
 
-    print("Command file is valid. Sending commands to devices." + "\n")
+    print("\n* Command file is valid. Sending commands to devices." + "\n")
 
 else:
 
-    print("File {} does not exist.".format(cmd_file))
+    print("\n* File {} does not exist.".format(cmd_file))
     sys.exit()
 
 
@@ -46,17 +46,20 @@ def ssh_conn(ip):
         #Starting from the beginning of the file
         selected_user_file.seek(0)
 
-        #Reading username from beginning of the file
+        #Grab username
         username = selected_user_file.readlines()[0].split(',')[0].rstrip("\n")
 
-        #Start from the beginning of file...grab password
+        #Starting from the beginning of the file...again
+        selected_user_file.seek(0)
+
+        #Grab password
         password = selected_user_file.readlines()[0].split(',')[1].rstrip("\n")
 
         #Log into switches
         session = paramiko.SSHClient()
 
         #Allows auto-accepting unknown host keys
-        session.set_missing_host_key_policy(paramiko,AutoAddPolicy())
+        session.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         #Connect to the device
         session.connect(ip.rstrip("\n"), username=username, password=password)
@@ -66,18 +69,18 @@ def ssh_conn(ip):
 
         #Setting terminal length for entire output 
         connection.send("enable\n")
-        connection.send("terminal length")
+        connection.send("terminal length 0\n")
         time.sleep(1)
 
         #Entering global config mode
         connection.send("\n")
-        connection.send("configure terminal")
+        connection.send("configure terminal\n")
         time.sleep(1)
 
         #Open user selected file for reading
         selected_cmd_file = open(cmd_file,'r')
 
-        #Starting from the beginning of the file
+        #Starting from the beginning of the cmd file
         selected_cmd_file.seek(0)
 
         #Writing each line in the file to the device
@@ -94,16 +97,16 @@ def ssh_conn(ip):
 
         #Checking command output for IOS 
         router_output = connection.recv(65535)
-
+        print(type(router_output))
         if re.search(b"% Invalid input", router_output):
 
             print("There was at least one IOS syntax error on device {}".format(ip))
 
         else:
 
-            print("DONE for device {}".format(ip))
+            print("\nDONE for device {} \n".format(ip))
 
-        print(str(router_output) + "\n")
+        print(re.findall(r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", str(router_output))[1])
 
         #Closing connection
         session.close()
