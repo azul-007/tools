@@ -117,7 +117,6 @@ def ssh_conn(ip):
             f.write(utilization + "\n")
 
         
-
         #Closing connection
         session.close()
 
