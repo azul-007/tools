@@ -14,6 +14,7 @@ def animation_function(self):
 
 	x=[]
 
+	#Iterating over the list of CPU values
 	for each_value in cpu_data:
 		if len(each_value) > 1:
 			x.append(float(each_value))
