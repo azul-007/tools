@@ -19,9 +19,16 @@ logging.getLogger("scapy.loading").setLevel(logging.ERROR)
 net_iface = input("Enter the interface on which to run: ")
 
 #Verify if interface is up
-
-
-#if interface is up. Need to download and install this tool in ubuntu
+#if interface is up. 
 def is_interface_up(net_iface):
 	addr = netifaces.ifaddresses(net_iface)
 	return netifaces.AF_INET in addr
+
+if (is_interface_up):
+
+	try:
+		subprocess.call(["ifconfig", net_iface, "promisc"], stdout = None, stderr = None, shell = False)
+	except:
+		print("\nFailed to configure interface as promiscuous.\n")
+	else:
+		print("\nInterface {} was set to PROMSIC mode. \n".format(net_iface))
