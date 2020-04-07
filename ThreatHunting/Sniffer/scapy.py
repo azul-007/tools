@@ -20,15 +20,44 @@ net_iface = input("Enter the interface on which to run: ")
 
 #Verify if interface is up
 #if interface is up. 
-def is_interface_up(net_iface):
-	addr = netifaces.ifaddresses(net_iface)
-	return netifaces.AF_INET in addr
+#def is_interface_up(net_iface):
+	#addr = netifaces.ifaddresses(net_iface)
+	#return netifaces.AF_INET in addr
 
-if (is_interface_up):
+try:
+	subprocess.call(["ifconfig", net_iface, "promisc"], stdout = None, stderr = None, shell = False)
+except:
+	print("\nFailed to configure interface as promiscuous.\n")
+else:
+	print("\nInterface {} was set to PROMSIC mode. \n".format(net_iface))
 
-	try:
-		subprocess.call(["ifconfig", net_iface, "promisc"], stdout = None, stderr = None, shell = False)
-	except:
-		print("\nFailed to configure interface as promiscuous.\n")
-	else:
-		print("\nInterface {} was set to PROMSIC mode. \n".format(net_iface))
+
+#Get number of packets to sniff.
+pkt_to_sniff = input("Enter # of packets to sniff: ")
+
+if int(pkt_to_sniff) != 0:
+	print("\nPackets to capture: {} \n".format(pkt_to_sniff))
+
+elif int(pkt_to_sniff) == 0:
+	print("Packets will be captured until timeout expires.\n")
+
+time_to_sniff = input("Enter number of seconds to run the capture: \n")
+
+if int(time_to_sniff) != 0:
+	print("\n Packets will be captured for {}".format(time_to_sniff))
+
+
+#Get protocols to sniff.
+proto_sniff = input("* Enter the protocol to filter by (arp|bootp|icmp|0 is all): ")
+ 
+if (proto_sniff == "arp") or (proto_sniff == "bootp") or (proto_sniff == "icmp"):
+    print("\nThe program will capture only %s packets.\n" % proto_sniff.upper())
+    
+elif (proto_sniff) == "0":
+    print("\nThe program will capture all protocols.\n")
+
+file_name = input("* Please give a name to the log file: ")
+ 
+#Creating the text file (if it doesn't exist) for packet logging and/or opening it for appending
+sniffer_log = open(file_name, "a")
+
