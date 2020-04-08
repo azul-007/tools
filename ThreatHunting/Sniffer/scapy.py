@@ -68,3 +68,6 @@ def packet_log(packet):
 
 	#Log packet information
 	if proto_sniff = "0":
+		print("Time: " + str(now) + "Protocol: ALL" + " SMAC: " + packet[0].src + " DMAC: " + packet[0].dst, file=sniffer_log)
+	elif (proto_sniff == "arp") or (proto_sniff == "bootp") or (proto_sniff == "icmp"):
+		print("Time: " + str(now) + "Protocol: " + proto_sniff.upper() + " SMAC: " + packet[0].src + " DMAC: " + packet[0].dst, file=sniffer_log)
