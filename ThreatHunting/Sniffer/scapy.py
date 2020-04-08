@@ -49,7 +49,8 @@ if int(time_to_sniff) != 0:
 
 #Get protocols to sniff.
 proto_sniff = input("* Enter the protocol to filter by (arp|bootp|icmp|0 is all): ")
- 
+
+
 if (proto_sniff == "arp") or (proto_sniff == "bootp") or (proto_sniff == "icmp"):
     print("\nThe program will capture only %s packets.\n" % proto_sniff.upper())
     
@@ -71,3 +72,19 @@ def packet_log(packet):
 		print("Time: " + str(now) + "Protocol: ALL" + " SMAC: " + packet[0].src + " DMAC: " + packet[0].dst, file=sniffer_log)
 	elif (proto_sniff == "arp") or (proto_sniff == "bootp") or (proto_sniff == "icmp"):
 		print("Time: " + str(now) + "Protocol: " + proto_sniff.upper() + " SMAC: " + packet[0].src + " DMAC: " + packet[0].dst, file=sniffer_log)
+
+
+print("\n Starting to sniff...")
+
+#Running the processes
+if proto_sniff == "0":
+	sniff(iface = net_iface, count = int(pkt_to_sniff), timeout = int(time_to_sniff), prn = packet_log)
+elif ((proto_sniff == "arp") or (proto_sniff == "bootp") or (proto_sniff == "icmp")):
+	sniff(iface = net_iface, filter = proto_sniff, count = int(pkt_to_sniff), timeout = int(time_to_sniff), prn = packet_log)
+else:
+	print("\nCould not ID protocol.\n")
+
+print("\nPackets have been logged to {}".format(file_name))
+
+sniffer_log.close()
+
