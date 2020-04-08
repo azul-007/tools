@@ -61,3 +61,10 @@ file_name = input("* Please give a name to the log file: ")
 #Creating the text file (if it doesn't exist) for packet logging and/or opening it for appending
 sniffer_log = open(file_name, "a")
 
+
+def packet_log(packet):
+
+	now = datetime.now()
+
+	#Log packet information
+	if proto_sniff = "0":
