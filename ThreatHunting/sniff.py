@@ -41,7 +41,7 @@ if int(pkt_to_sniff) != 0:
 elif int(pkt_to_sniff) == 0:
 	print("Packets will be captured until timeout expires.\n")
 
-time_to_sniff = input("Enter number of seconds to run the capture: \n")
+time_to_sniff = input("Enter number of seconds to run the capture: ")
 
 if int(time_to_sniff) != 0:
 	print("\n Packets will be captured for {}".format(time_to_sniff))
