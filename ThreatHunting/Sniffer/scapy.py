@@ -85,3 +85,5 @@ else:
 
 print("\nPackets have been logged to {}".format(file_name))
 
+sniffer_log.close()
+
