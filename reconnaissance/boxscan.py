@@ -20,7 +20,7 @@ os.makedirs('/root/boxes/'+args.name)
 os.chdir('/root/boxes/'+args.name)
 
 def nmap():
-    os.system('nmap -sV -Pn -sS -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
+    os.system('nmap -sV -V -A -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
