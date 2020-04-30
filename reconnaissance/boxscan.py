@@ -16,8 +16,8 @@ parser.add_argument('--name', '-n', help='Specify victim name via --name or -n')
 args = parser.parse_args()
 
 #CHANGE ROOT USER!
-os.makedirs('/root/boxes/'+args.name) 
-os.chdir('/root/boxes/'+args.name)
+os.makedirs('/CHANGEME/boxes/'+args.name) 
+os.chdir('/CHANGEME/boxes/'+args.name)
 
 def nmap():
     os.system('nmap -sV -V -A -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
