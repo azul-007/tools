@@ -4,7 +4,7 @@ import os
 host = "192.168.1.100"
 
 #Create rack socket and bind to public interface
-if os.name = "nt":
+if os.name == "nt":
 	socket_protocol = socket.IPPROTO_IP
 else:
 	socket_protocol = socket.IPPROTO_ICMP
@@ -24,5 +24,5 @@ if os.name == "nt":
 print(sniffer.recv(65565))
 
 #If Windows, turn off promiscuous mode
-if os.name = "nt":
+if os.name == "nt":
 	sniffer.ioctl(socket.SIO_RCVALL, socket.SIO_RCVALL_OFF)
