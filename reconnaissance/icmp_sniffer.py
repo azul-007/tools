@@ -59,6 +59,17 @@ class ICMP(Structure):
 		pass
 
 		#if it's ICMP, we want it
+		if ip_header.protocol == "ICMP":
+
+			#calculate where our ICMP packet starts
+			offset = ip_header.ihl * 4
+			buf = raw_buffer[offset:offset + sizeof(ICMP)]
+
+			#create ICMP structure
+			icmp_header = ICMP(buf)
+
+			print("ICMP -> Type: {} Code: {}".format(icmp_header.type,icmp_header.code))
+
 
 if os.name == "nt":
 	socket_protocol = socket.IPPROTO_IP
