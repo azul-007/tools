@@ -1,9 +1,29 @@
 import os
+import time
 import struct
+import threading
 from ctypes import *
+from netaddr import IPNetwork,IPAddress
 
 #host to listen on
-hose = 192.168.1.100
+host = "192.168.1.100"
+
+#subnet to target
+subnet = "192.168.1.0/24"
+
+#String to check ICMP responses
+magic_message = "PYTHONISTHEGOAT"
+
+#Sends out UDP datagrams
+def udp_sender(subnet, magic_message):
+	time.sleep(5)
+	sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+	for ip in IPNetwork(subnet):
+	try:
+		sender.sendto(magic_message,("{}".format(ip),65212))
+	except:
+		pass
 
 #Our IP Header
 class IP(Structure):
@@ -96,7 +116,24 @@ try:
 		#print out the protocol that was detected and the hosts
 		print("Protocol: {} {} -> {}".format(ip_header.protocol,ip_header.src_address, ip_header.dst_address))
 
+		print("ICMP -> Type: {} Code: {}".format(icmp_header.type,icmp_header.code))
+
+			#Now check for the TYPE 3 and CODE
+			if icmp_header.code == 3 and icmp_header.type == 3:
+
+				#make sure host is in our target subnet
+				if IPAddress(ip_header.src_address) in IPNetwork(subnet):
+
+					#Make sure it has magic message
+					if raw_buffer[len(raw_buffer) - len(magic_message):] == magic_message:
+						print("Host Up: {}".format(ip_header.src_address))
+
+
+
 except KeyboardInterrupt:
 
 	if os.name == "nt":
 		sniffer.ioctl(socket.SIO_RCVALL, socket.SIO_RCVALL_OFF)
+
+
+
