@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import nmap
 import argparse
 from multiprocessing import Process
 
@@ -19,8 +20,11 @@ os.makedirs(args.name)
 os.chdir(args.name)
 os.makedirs(args.name+'/images')
 
+nm = nmap.PortScanner()
+trash = nm.scan(args.target,'80') #suppressing output
+
 #Yea I know all these tools have file output options, I move too quickly sometimes
-#and forget which box I'm on. So I use these as a extra reminder. Feel free to change urs
+#and forget which box I'm on. So I use these as a reminder. Feel free to change urs
 def nmap():
     os.system('nmap -sV -sT -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
 
@@ -29,9 +33,19 @@ def nikto():
 
 def dirb():
     os.system('dirb http://{0} > {1}.dirb.txt'.format(args.target,args.name))
-
-
-if __name__ == '__main__':
+    
+def gobuster():
+    os.system('gobuster dir -u http://{0} -w ../../../../../usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > {1}.gobuster.txt'.format(args.target,args.name))
+    
+  
+if nm[args.target].has_tcp(80):
+    p4 = Process(target=gobuster)
+    p4.start()
+else:
+    print("Web server not available")
+    
+#if __name__ == '__main__':    
+    
     p1 = Process(target=nmap)
     p1.start()
     
@@ -40,9 +54,10 @@ if __name__ == '__main__':
     
     p3 = Process(target=dirb)
     p3.start()
-    
+                  
     p1.join()
     p2.join()
     p3.join()
+    p4.join()
     
 print("Done!")
