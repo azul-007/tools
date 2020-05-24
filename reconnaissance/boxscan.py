@@ -15,15 +15,14 @@ parser.add_argument('--target', '-t',help='Specify victim\'s  IP via --target or
 parser.add_argument('--name', '-n', help='Specify victim name via --name or -n')
 args = parser.parse_args()
 
-#CHANGE ROOT USER!
-os.makedirs('/CHANGEME/boxes/'+args.name) 
-os.chdir('/CHANGEME/boxes/'+args.name)
-os.makedirs('/CHANGME/boxes/images'+args.name)
+os.makedirs(args.name) 
+os.chdir(args.name)
+os.makedirs(args.name+'/images')
 
 #Yea I know all these tools have file output options, I move too quickly sometimes
 #and forget which box I'm on. So I use these as a extra reminder. Feel free to change urs
 def nmap():
-    os.system('nmap -sV -V -A -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
+    os.system('nmap -sV -sT -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
