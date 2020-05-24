@@ -18,7 +18,10 @@ args = parser.parse_args()
 #CHANGE ROOT USER!
 os.makedirs('/CHANGEME/boxes/'+args.name) 
 os.chdir('/CHANGEME/boxes/'+args.name)
+os.makedirs('/CHANGME/boxes/images'+args.name)
 
+#Yea I know all these tools have file output options, I move too quickly sometimes
+#and forget which box I'm on. So I use these as a extra reminder. Feel free to change urs
 def nmap():
     os.system('nmap -sV -V -A -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
 
