@@ -19,7 +19,7 @@ args = parser.parse_args()
 os.chdir('/home/dan/GitHub/boxes/')
 os.makedirs(args.name)
 os.chdir('/home/dan/GitHub/boxes/'+args.name) 
-os.makedirs(args.name+'/images')
+os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
 
 
 nm = nmap.PortScanner()
