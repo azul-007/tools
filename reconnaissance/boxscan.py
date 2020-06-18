@@ -29,7 +29,7 @@ os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
 #and forget which box I'm on. So I use these as a reminder. Feel free to change urs
 
 def nmap():
-    os.system('nmap -sV -sT -O -p- {0} > {1}.nmap.txt'.format(args.target,args.name))
+    os.system('nmap -sS -A {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
