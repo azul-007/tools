@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import os
-import nmap
 import argparse
 from time import process_time
 from multiprocessing import Process
