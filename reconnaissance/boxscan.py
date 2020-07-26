@@ -3,6 +3,7 @@
 import os
 import nmap
 import argparse
+from time import process_time
 from multiprocessing import Process
 
 #Usage: python boxscan.py --target victim_ip --name name_of_box
@@ -22,30 +23,18 @@ os.chdir('/home/dan/GitHub/boxes/'+args.name)
 os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
 
 
-#nm = nmap.PortScanner()
-#trash = nm.scan(args.target,'80') #suppressing output
-
-#Yea I know all these tools have file output options, I move too quickly sometimes
-#and forget which box I'm on. So I use these as a reminder. Feel free to change urs
-
 def nmap():
     os.system('nmap -sS -A {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
 
-def dirb():
-    os.system('dirb http://{0} > {1}.dirb.txt'.format(args.target,args.name))
+#def dirb():
+    #os.system('dirb http://{0} > {1}.dirb.txt'.format(args.target,args.name))
     
-#def gobuster():
-    #os.system('gobuster dir -u http://{0} -w ../../../../../usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > {1}.gobuster.txt'.format(args.target,args.name))
+def gobuster():
+    os.system('gobuster dir -u http://{0} -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > {1}.gobuster.txt'.format(args.target,args.name))
     
-  
-'''if nm[args.target].has_tcp(80):
-    p4 = Process(target=gobuster)
-    p4.start()
-else:
-    print("Web server not available")'''
     
 if __name__ == '__main__':    
     
@@ -61,6 +50,5 @@ if __name__ == '__main__':
     p1.join()
     p2.join()
     p3.join()
-    p4.join()
     
 print("Done!")
