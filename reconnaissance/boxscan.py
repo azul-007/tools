@@ -20,7 +20,7 @@ os.chdir('/home/dan/GitHub/boxes/')
 os.makedirs(args.name)
 os.chdir('/home/dan/GitHub/boxes/'+args.name) 
 os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
-os.chmod(os.getcwd(),0o660)
+os.chmod('/home/dan/GitHub/boxes/'+args.name+'/images',0o777)
 
 
 def nmap():
