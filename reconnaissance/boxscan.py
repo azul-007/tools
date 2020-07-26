@@ -23,7 +23,7 @@ os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
 
 
 def nmap():
-    os.system('nmap -sS -A -sU --reason {0} > {1}.nmap.txt'.format(args.target,args.name))
+    os.system('nmap -sS -A -sU --reason -sC {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
@@ -39,12 +39,16 @@ if __name__ == '__main__':
     
     p1 = Process(target=nmap)
     p1.start()
+    #nmap_start = process_time()
     
     p2 = Process(target=nikto)
     p2.start()
+    #nikto_start = process_time()
     
-    p3 = Process(target=dirb)
+    p3 = Process(target=gobuster)
     p3.start()
+    #gobuster_start = process_time()
+    
                   
     p1.join()
     p2.join()
