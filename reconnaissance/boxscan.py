@@ -10,7 +10,7 @@ from multiprocessing import Process
 #Author: azul-007
 #Description
 #Creates directory from name of box. Scans target, creates an nmap, nikto 
-#and dirb txt file then stores the files in the directory of box name.
+#and gobuster txt file then stores the files in the directory of box name.
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', '-t',help='Specify victim\'s  IP via --target or -t')
@@ -24,7 +24,7 @@ os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
 
 
 def nmap():
-    os.system('nmap -sS -A {0} > {1}.nmap.txt'.format(args.target,args.name))
+    os.system('nmap -sS -A -sU --reason {0} > {1}.nmap.txt'.format(args.target,args.name))
 
 def nikto():
     os.system('nikto -host http://{0} > {1}.nikto.txt'.format(args.target,args.name))
