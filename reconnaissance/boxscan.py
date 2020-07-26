@@ -20,6 +20,7 @@ os.chdir('/home/dan/GitHub/boxes/')
 os.makedirs(args.name)
 os.chdir('/home/dan/GitHub/boxes/'+args.name) 
 os.makedirs('/home/dan/GitHub/boxes/'+args.name+'/images')
+os.chmod(os.getcwd(),0o660)
 
 
 def nmap():
@@ -39,14 +40,17 @@ if __name__ == '__main__':
     
     p1 = Process(target=nmap)
     p1.start()
+    print("Starting nmap...)
     #nmap_start = process_time()
     
     p2 = Process(target=nikto)
     p2.start()
+    print("Starting nikto...)
     #nikto_start = process_time()
     
     p3 = Process(target=gobuster)
     p3.start()
+    print("Starting gobuster...")
     #gobuster_start = process_time()
     
                   
